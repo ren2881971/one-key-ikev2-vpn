@@ -563,7 +563,7 @@ function success_info(){
     echo -e "# [$(__green "Install Complete")]"
     echo -e "# Version:$VER"
     echo -e "# There is the default login info of your IPSec/IkeV2 VPN Service"
-    echo -e "# UserName:$(__green " $username")"
+    echo -e "# UserName:$(__green " biubiuVPN")"
     echo -e "# PassWord:$(__green " $password")"
     echo -e "# PSK:$(__green " $psk")"
     echo -e "# you should change default username and password in$(__green " /usr/local/etc/ipsec.secrets")"
