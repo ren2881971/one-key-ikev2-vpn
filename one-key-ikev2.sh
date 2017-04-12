@@ -150,7 +150,7 @@ function pre_install(){
             fi
     fi
     echo "please input the ip (or domain) of your VPS:"
-    read -p "ip or domain(default_value:${IP}):" vps_ip
+    read -p "ip or domain(default_value:${IP}):"    
     if [ "$vps_ip" = "" ]; then
         vps_ip=$IP
     fi
@@ -431,15 +431,15 @@ EOF
 
 # configure the ipsec.secrets
 function configure_secrets(){
-    randomstr=`openssl rand -base64 16`
-    username=$randomstr
-    password=$randomstr
-    psk=$randomstr
+   
+ 
+    password=`openssl rand -base64 16`
+    psk=`openssl rand -base64 8`
     cat > /usr/local/etc/ipsec.secrets<<-EOF
 : RSA server.pem
 : PSK "$psk"
 : XAUTH "myXAUTHPass"
-$username %any : EAP "$password"
+biubiuVPN %any : EAP "$password"
 EOF
 }
 
