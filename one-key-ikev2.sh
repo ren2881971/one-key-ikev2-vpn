@@ -431,11 +431,15 @@ EOF
 
 # configure the ipsec.secrets
 function configure_secrets(){
+    randomstr=`openssl rand -base64 16`
+    username=$randomstr
+    password=$randomstr
+    psk=$randomstr
     cat > /usr/local/etc/ipsec.secrets<<-EOF
 : RSA server.pem
-: PSK "myPSKkey"
+: PSK "$psk"
 : XAUTH "myXAUTHPass"
-myUserName %any : EAP "myUserPass"
+$username %any : EAP "$password"
 EOF
 }
 
@@ -559,9 +563,9 @@ function success_info(){
     echo -e "# [$(__green "Install Complete")]"
     echo -e "# Version:$VER"
     echo -e "# There is the default login info of your IPSec/IkeV2 VPN Service"
-    echo -e "# UserName:$(__green " myUserName")"
-    echo -e "# PassWord:$(__green " myUserPass")"
-    echo -e "# PSK:$(__green " myPSKkey")"
+    echo -e "# UserName:$(__green " $username")"
+    echo -e "# PassWord:$(__green " $password")"
+    echo -e "# PSK:$(__green " $psk")"
     echo -e "# you should change default username and password in$(__green " /usr/local/etc/ipsec.secrets")"
     echo -e "# you cert:$(__green " ${cur_dir}/my_key/ca.cert.pem ")"
     if [ "$have_cert" = "1" ]; then
